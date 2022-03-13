@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Jelly
+  - Blue Fruit
+  - Orange Fruit
+  - Green Fruit
+  - Red Fruit
+  - Yellow Fruit
+  - Stone
+  - Star Blue
+  - Lime Fruit
+  - Carrot Fruit
+  - Cherry Fruit
+  - Lemon Fruit
+  - Bomb
   layers:
   - Default
   - TransparentFX
