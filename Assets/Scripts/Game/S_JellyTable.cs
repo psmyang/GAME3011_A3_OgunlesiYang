@@ -12,8 +12,6 @@ using UnityEngine;
     public class S_JellyTable : MonoBehaviour
     {
         public int maxCandy = 0;
-        public int score = 0;
-        public int scoreToReach;
         public GameState currentState = GameState.move;
         public int width;
         public int height;
@@ -24,16 +22,21 @@ using UnityEngine;
         public GameObject[,] allCandy;
         public S_Fruit currentCandy;
         private FruitMatches fruitMatches;
-        
+
+    //Animator anim;
 
 
 
-        // Start is called before the first frame update
-        void Start()
+
+    // Start is called before the first frame update
+    void Start()
         {
             fruitMatches = FindObjectOfType<FruitMatches>();
-            //Creating the width and height of board
-            allTiles = new FruitTile[width, height];
+        //anim = GetComponentInParent<Animator>();
+
+
+        //Creating the width and height of board
+        allTiles = new FruitTile[width, height];
             allCandy = new GameObject[width, height];
 
             //Setup();
@@ -149,10 +152,14 @@ using UnityEngine;
                 if (fruitMatches.currentMatches.Count >= 5)
                 {
                     CheckTomakeBombs();
-                }
-                fruitMatches.currentMatches.Remove(allCandy[column, row]);
 
-                FindObjectOfType<S_SoundMana>().PlayPop();
+                }
+            fruitMatches.currentMatches.Remove(allCandy[column, row]);
+               FindObjectOfType<S_JellyManager>().AddScore( 25);
+
+            
+
+            FindObjectOfType<S_SoundMana>().PlayPop();
 
 
                 Destroy(allCandy[column, row]);
@@ -169,6 +176,7 @@ using UnityEngine;
                     if (allCandy[i, j] != null)
                     {
                         destroyMatchesAt(i, j);
+
                     }
                 }
             }

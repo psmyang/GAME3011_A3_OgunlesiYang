@@ -32,6 +32,7 @@ public class S_Fruit : MonoBehaviour
     public bool isCandyBomb;
     public GameObject CandyBomb;
 
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -54,13 +55,7 @@ public class S_Fruit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //findMatches();
-
-        //if (isMatched)
-        //{
-        //    SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
-        //    mySprite.color = new Color(1f, 1f, 1f, .2f);
-        //}
+        
 
         targetX = column;
         targetY = row;
@@ -110,6 +105,7 @@ public class S_Fruit : MonoBehaviour
         {
             //This piece is a candy bomb, and the other piece is the candy to destroy
             fruitMatches.MatchPiecesOfColor(otherCandy.tag);
+
             //isMatched = true;
         }
         else if (otherCandy.GetComponent<S_Fruit>().isCandyBomb)
@@ -131,6 +127,7 @@ public class S_Fruit : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 board.currentCandy = null;
                 board.currentState = GameState.move;
+
             }
             else
             {

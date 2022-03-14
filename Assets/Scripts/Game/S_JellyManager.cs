@@ -14,11 +14,11 @@ public enum E_Difficulty
 public class S_JellyManager : MonoBehaviour
 {
     public E_Difficulty difficulty = E_Difficulty.Easy;
-    public int MaxStones = 5;
     public int Score = 0;
     public int Goal = 5000;
     public int TimeCounter = 250;
     public bool isGameOver = false;
+    public bool isGameWin = false;
 
     [SerializeField] Text ModeText;
     [SerializeField] Text ScoreText;
@@ -30,8 +30,9 @@ public class S_JellyManager : MonoBehaviour
     void Start()
     {
         board = FindObjectOfType<S_JellyTable>();
-
         ScoreText.text = Score.ToString();
+
+        //ScoreText.text = "Score: " + board.score;
         TimeCounterText.text = "Time: " + TimeCounter.ToString();
         GoalText.text = "Goal: " + Goal.ToString();
         StartCoroutine(CountTime());
@@ -59,6 +60,11 @@ public class S_JellyManager : MonoBehaviour
         {
             SceneManager.LoadScene("Map_End");
         }
+
+        if (isGameWin)
+        {
+            SceneManager.LoadScene("Map_Win");
+        }
     }
 
     public void EasyMode()
@@ -66,52 +72,59 @@ public class S_JellyManager : MonoBehaviour
         difficulty = E_Difficulty.Easy;
         TimeCounter = 250;
         Goal = 5000;
-        MaxStones = 0;
         ModeText.text = "Mode: Easy";
         board.maxCandy = 3;
         board.Setup();
+        ManaReset();
+
     }
 
     public void MediumMode()
     {
         difficulty = E_Difficulty.Medium;
         TimeCounter = 200;
-        Goal = 6000;
-        MaxStones = 0;
+        Goal = 10000;
         ModeText.text = "Mode: Medium";
         board.maxCandy = 4;
         board.Setup();
+        ManaReset();
+
     }
 
     public void HardMode()
     {
         difficulty = E_Difficulty.Hard;
         TimeCounter = 250;
-        Goal = 3200;
-        MaxStones = 10;
+        Goal = 15000;
         ModeText.text = "Mode: Hard";
         board.maxCandy = 5;
         board.Setup();
+        ManaReset();
+
     }
+
+
 
     public void AddScore(int score)
     {
         Score += score;
         ScoreText.text = Score.ToString();
-        if(Score >= Goal)
+        if (Score >= Goal)
         {
-            isGameOver = true;
+            isGameWin = true;
         }
     }
 
     void ManaReset()
     {
         isGameOver = false;
+        isGameWin = false;
+
         Score = 0;
         ScoreText.text = Score.ToString();
         TimeCounterText.text = "Time: " + TimeCounter.ToString();
         GoalText.text = "Goal: " + Goal.ToString();
-       // board = FindObjectOfType<S_JellyTable>();
+        board = FindObjectOfType<S_JellyTable>();
 
     }
 }
